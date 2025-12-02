@@ -1,111 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="robots" content="noindex, nofollow, nosnippet" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow, nosnippet">
     <title>CartiVerse | System Maintenance</title>
 
     <!-- Tailwind -->
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- Particles.js -->
+    <!-- ParticlesJS -->
     <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 
     <style>
         :root {
-            --primary: #3b82f6;
-            --glow-weak: rgba(59, 130, 246, 0.35);
-            --glow-strong: rgba(59, 130, 246, 0.75);
+            --primary: #1E88E5;
+            --primary-light: rgba(30, 136, 229, 0.15);
+            --primary-dark: #1565C0;
 
-            --border: rgba(120, 150, 255, 0.38);
-            --bg1: rgba(8, 8, 20, 0.96);
-            --bg2: rgba(2, 2, 10, 0.98);
+            --text-light: #ffffff;
+            --text-muted: rgba(255, 255, 255, 0.7);
 
-            --radius: 1rem;
+            --bg-dark: #121212;
+            --bg-darker: #0a0a0a;
+
+            --card-bg: rgba(30, 30, 30, 0.6);
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-color: #6496fa;
+
+            --radius-lg: 16px;
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
+        /* Background */
         body {
-            margin: 0;
-            font-family: "Inter", sans-serif;
-            background: #070712;
-            overflow: hidden;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-dark);
             display: flex;
             justify-content: center;
             align-items: center;
-            color: #e0e7ff;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            color: var(--text-light);
         }
 
-        /* PARTICLES */
+        /* ParticlesJS background layer */
         #particles-js {
-            position: fixed;
+            position: absolute;
             inset: 0;
-            z-index: 1;
-        }
-        #particles-js canvas {
-            pointer-events: auto;
-        }
-
-        /* CARD — restored original sizing */
-        .card {
-            position: relative;
-            z-index: 10;
-
-            /* 🔥 ORIGINAL DIMENSIONS RESTORED */
-            max-width: 32rem;    /* EXACT max-w-lg */
-            width: 91.666%;      /* EXACT w-11/12 */
-            padding: 2rem;       /* EXACT p-8 */
-
-            border-radius: var(--radius);
-            border: 1px solid var(--border);
-
-            background: radial-gradient(circle at 30% 20%, var(--bg1), var(--bg2));
-
-            box-shadow:
-                inset 2px 2px 6px rgba(255, 255, 255, 0.04),
-                inset -2px -2px 10px rgba(0, 0, 0, 1),
-                0 0 28px var(--glow-weak),
-                0 0 60px rgba(59, 130, 246, 0.28);
-
-            animation: glowPulse 4s ease-in-out infinite;
-            transition: 0.35s ease;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
         }
 
-        .card:hover {
-            border-color: var(--primary);
-            box-shadow:
-                inset 3px 3px 7px rgba(255, 255, 255, 0.07),
-                inset -3px -3px 10px rgba(0, 0, 0, 1),
-                0 0 45px var(--glow-strong),
-                0 0 115px rgba(59, 130, 246, 0.55);
-        }
-
-        @keyframes glowPulse {
-            0%, 100% {
+        /* ------------------------------------- */
+        /* PULSING BORDER GLOW (using --primary) */
+        /* ------------------------------------- */
+        @keyframes borderPulse {
+            0% {
                 box-shadow:
-                    inset 2px 2px 6px rgba(255, 255, 255, 0.04),
-                    inset -2px -2px 10px rgba(0, 0, 0, 1),
-                    0 0 22px rgba(59, 130, 246, 0.25),
-                    0 0 54px rgba(59, 130, 246, 0.18);
+                    inset 2px 2px 6px rgba(255,255,255,0.04),
+                    inset -2px -2px 6px rgba(0,0,0,0.9),
+                    0 0 12px var(--primary-light),
+                    0 0 22px var(--primary-light);
             }
             50% {
                 box-shadow:
-                    inset 2px 2px 6px rgba(255, 255, 255, 0.05),
-                    inset -2px -2px 10px rgba(0, 0, 0, 1),
-                    0 0 33px rgba(59, 130, 246, 0.55),
-                    0 0 75px rgba(59, 130, 246, 0.35);
+                    inset 2px 2px 6px rgba(255,255,255,0.04),
+                    inset -2px -2px 6px rgba(0,0,0,0.9),
+                    0 0 22px rgba(30,136,229,0.35),
+                    0 0 40px rgba(30,136,229,0.25);
+            }
+            100% {
+                box-shadow:
+                    inset 2px 2px 6px rgba(255,255,255,0.04),
+                    inset -2px -2px 6px rgba(0,0,0,0.9),
+                    0 0 12px var(--primary-light),
+                    0 0 22px var(--primary-light);
             }
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(18px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Card */
+        .maintenance-card {
+            z-index: 10;
+            position: relative;
+            padding: 2rem;
+            background: radial-gradient(circle at 30% 30%, var(--bg-darker), var(--bg-dark));
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+
+            animation: borderPulse 3s ease-in-out infinite;
+            transition: var(--transition);
         }
 
-        .fade {
-            animation: fadeIn 0.7s ease forwards;
+        /* Hover bright glow */
+        .maintenance-card:hover {
+            animation: none;
+            border: 1px solid var(--primary);
+            box-shadow:
+                inset 2px 2px 6px rgba(255,255,255,0.05),
+                inset -2px -2px 6px rgba(0,0,0,1),
+                0 0 40px rgba(30,136,229,0.45),
+                0 0 80px rgba(30,136,229,0.25);
         }
     </style>
 </head>
@@ -114,40 +111,41 @@
 
     <div id="particles-js"></div>
 
-    <div class="card fade text-center">
-        <h1 class="text-3xl md:text-4xl font-extrabold mb-4 text-indigo-400">
+    <div class="maintenance-card p-8 md:p-12 max-w-lg w-11/12 rounded-xl text-center">
+        <h1 class="text-3xl md:text-4xl font-extrabold mb-3" style="color: var(--primary);">
             CartiVerse is Under Maintenance
         </h1>
 
-        <p class="text-lg md:text-xl mb-7 text-gray-300 leading-relaxed">
-            We’re improving system performance and stability.
-            Thank you for your patience — we’ll be back online shortly.
+        <p class="text-lg md:text-xl mb-8" style="color: var(--text-muted);">
+            We're currently performing essential system upgrades. We apologize for the inconvenience and will be back online shortly.
         </p>
 
-        <p class="text-sm text-gray-400">
-            Try refreshing again in a few minutes, or check our official channels for updates.
+        <p class="text-sm" style="color: var(--text-muted);">
+            Please refresh your browser in a few minutes or follow our official social channels for updates.
         </p>
     </div>
 
     <script>
         particlesJS("particles-js", {
             "particles": {
-                "number": { "value": 100, "density": { "enable": true, "value_area": 900 } },
-                "color": { "value": "#818cf8" },
+                "number": {
+                    "value": 100,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#1E88E5" }, /* primary brand blue */
                 "shape": { "type": "circle" },
-                "opacity": { "value": 0.45 },
+                "opacity": { "value": 0.5 },
                 "size": { "value": 3, "random": true },
                 "line_linked": {
                     "enable": true,
                     "distance": 150,
-                    "color": "#818cf8",
+                    "color": "#1E88E5",
                     "opacity": 0.4,
                     "width": 1
                 },
                 "move": {
                     "enable": true,
-                    "speed": 1.35,
-                    "direction": "none",
+                    "speed": 1.5,
                     "out_mode": "out"
                 }
             },
@@ -159,7 +157,10 @@
                     "resize": true
                 },
                 "modes": {
-                    "grab": { "distance": 135, "line_linked": { "opacity": 1 } },
+                    "grab": {
+                        "distance": 120,
+                        "line_linked": { "opacity": 1 }
+                    },
                     "push": { "particles_nb": 2 }
                 }
             },
